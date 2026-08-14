@@ -1,33 +1,31 @@
-{
-  "name": "Python 3",
-  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-  "image": "mcr.microsoft.com/devcontainers/python:1-3.11-bookworm",
-  "customizations": {
-    "codespaces": {
-      "openFiles": [
-        "README.md",
-        "app.py"
-      ]
-    },
-    "vscode": {
-      "settings": {},
-      "extensions": [
-        "ms-python.python",
-        "ms-python.vscode-pylance"
-      ]
-    }
-  },
-  "updateContentCommand": "[ -f packages.txt ] && sudo apt update && sudo apt upgrade -y && sudo xargs apt install -y <packages.txt; [ -f requirements.txt ] && pip3 install --user -r requirements.txt; pip3 install --user streamlit; echo '✅ Packages installed and Requirements met'",
-  "postAttachCommand": {
-    "server": "streamlit run app.py --server.enableCORS false --server.enableXsrfProtection false"
-  },
-  "portsAttributes": {
-    "8501": {
-      "label": "Application",
-      "onAutoForward": "openPreview"
-    }
-  },
-  "forwardPorts": [
-    8501
-  ]
-}
+import streamlit as st
+
+#ส่วนที่ 1 หัวข้อหน้าเว็บ (Title สีแดง)
+st.markdown("# :red[🏃 แอปพลิเคชันคำนวณค่าดัชนีมวลกาย BMI]")
+st.write("กรอกข้อมูลและส่วนสูงของคุณ เพื่อเช็กสุชภาพเบื้องต้น")
+
+#ส่วนที่ 2 สร้างช่องรับค่าน้ำหนัก และ ส่วนสูง
+weight = st.number_input("กรอกน้ำหนักของคุณ (กิโลกรัม):", min_value=1.0,value=1.0)
+height_cm = st.number_input("กรอกส่วนสูงของคุณ (เซนติเมตร):", min_value=1.0,value=1.0)
+
+#ส่วนที่ 3  สร้างปุ่มกดคำนวณ
+if st.button("คำนวณค่า BMI 🎯 "):
+    # แปลงส่วนสูงจาก cm เป็น เมตร แล้วคำนวณ BMI
+    height_m = height_cm / 100
+    bmi = weight/ (height_m ** 2)
+
+    st.write("---")
+    st.header(f"ค่า BMI ของคุณคือ: **{bmi:.2f}**")
+
+#ส่วนที่ 4 แปลผลค่า BMI ตามเกณฑ์
+if bmi < 18.5:
+  st.warning("⚠️ คุณมีน้ำหนักน้อยกว่าเกณฑ์ (ผอม)")
+elif bmi <= bmi < 23.0:
+  st.success("🎉  คุณมีน้ำหนักอยู่ในเกณฑ์ปกติ (สุขภาพดี)")
+elif bmi <= bmi < 25.0:
+  st.info("💡  คุณเริ่มมีน้ำหนักเกินเกณฑ์ (ท้วม)")  
+else:
+  st.eror("🚨  คุณอยู่ในเกณฑ์อ้วน ควรระวังเรื่องสุขภาพและออกกำลังกาย")
+
+st.divider()
+st.write("นางสาวจิณัฏฐ์ฐิตา สุธนิล เลขที่ 12 ม.4/7")
