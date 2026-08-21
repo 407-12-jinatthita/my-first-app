@@ -101,5 +101,5 @@ if st.session_state.get("is_ended", False):
     show_result_dialog(ans1, ans2)
 
 st.divider()
-st.write("นางสาวจิณัฐ์ฐิตา สุธนิล เลขที่ 12 ม.4/7")
+st.write("นางสาวจิณัฏฐ์ฐิตา สุธนิล เลขที่ 12 ม.4/7")
 
