@@ -100,11 +100,11 @@ ans2 = st.text_input(
     value=st.session_state.ans2_val,
 )
 ans = st.text_input(
-    "ข้อ 3: Cats love to eat `L _ m _ n`. 🍋",
+    "ข้อ 3: A sour yellow fruit `L _ m _ n`. 🍋",
     value=st.session_state.ans3_val,
 )
 ans = st.text_input(
-    "ข้อ 4: Cats love to eat `P _ n`. 🖊️",
+    "ข้อ 4: Used for writing `P _ n`. 🖊️",
     value=st.session_state.ans4_val,
 )
 # อัปเดตค่าล่าสุดเข้าตัวแปร
